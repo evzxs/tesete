@@ -38,14 +38,28 @@ function CriarCard(){
             publico: 1,
             criacao: new Date()
         };
-        foto ? Object.assign(body, {foto: foto.name.split('.').pop()}): Object.assign(body, {foto: null});
+        if(foto){
+            const nomefoto = foto.name.split('.').pop().toLowerCase()
+            if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg'){Object.assign(body, {foto: foto.name.split('.').pop()})}else{Object.assign(body, {foto: null});}
+        }
         db.collection('cards').add(body).then((resultado)=>{
-            if(foto){storage.ref(`imagens/${resultado.id+'.'+foto.name.split('.').pop()}`).put(foto).then(()=>{
-                setMsgTipo('sucesso');
-                setCarregando(0);
-                setBotao('disabled');
-                setTimeout(()=>{navigate('/')}, 2000);
-            });
+            if(foto){
+                const nomefoto = foto.name.split('.').pop().toLowerCase()
+                if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg'){
+                    console.log(foto.name)
+                    storage.ref(`imagens/${resultado.id+'.'+nomefoto}`).put(foto).then(()=>{
+                        setMsgTipo('sucesso');
+                        setCarregando(0);
+                        setBotao('disabled');
+                        setTimeout(()=>{navigate('/')}, 2000);
+                    });
+                }
+                else{
+                    setMsgTipo('sucesso');
+                    setCarregando(0);
+                    setBotao('disabled');
+                    setTimeout(()=>{navigate('/')}, 2000);
+                }
             }
             else{
                 setMsgTipo('sucesso');
@@ -54,6 +68,7 @@ function CriarCard(){
                 setTimeout(()=>{navigate('/')}, 2000);
             };
         }).catch(erro => {
+            console.log(erro)
             setMsgTipo('erro');
             setCarregando(0);
         });

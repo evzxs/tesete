@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/tesete/static/css/main.073c9b0a.css",
-    "main.js": "/tesete/static/js/main.b9b8f323.js",
+    "main.js": "/tesete/static/js/main.f52b6cd8.js",
     "index.html": "/tesete/index.html",
     "main.073c9b0a.css.map": "/tesete/static/css/main.073c9b0a.css.map",
-    "main.b9b8f323.js.map": "/tesete/static/js/main.b9b8f323.js.map"
+    "main.f52b6cd8.js.map": "/tesete/static/js/main.f52b6cd8.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.b9b8f323.js"
+    "static/js/main.f52b6cd8.js"
   ]
 }

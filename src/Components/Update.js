@@ -1,32 +1,16 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Update = () => {
-  const [id, setId] = useState(0);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
-  const navigate = useNavigate();
 
   useEffect(() => {
-    setId(localStorage.getItem("id"));
-    setName(localStorage.getItem("name"));
-    setEmail(localStorage.getItem("email"));
+
   }, []);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log("Id...", id);
-    axios
-      .put(`https://62a59821b9b74f766a3c09a4.mockapi.io/crud-youtube/${id}`, {
-        name: name,
-        email: email,
-      })
-      .then(() => {
-        navigate("/read");
-      });
+    console.log("Id...");
   };
 
   return (
@@ -38,8 +22,7 @@ const Update = () => {
           <input
             type="text"
             className="form-control"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => console.log(e.target.value)}
           />
         </div>
 
@@ -48,8 +31,7 @@ const Update = () => {
           <input
             type="email"
             className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => console.log(e.target.value)}
           />
         </div>
 

@@ -1,24 +1,10 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Create = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const history = useNavigate();
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("clciekd");
-    axios
-      .post("https://62a59821b9b74f766a3c09a4.mockapi.io/crud-youtube", {
-        name: name,
-        email: email,
-      })
-      .then(() => {
-        history("/read");
-      });
   };
 
   return (
@@ -35,7 +21,7 @@ const Create = () => {
           <input
             type="text"
             className="form-control"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => console.log(e.target.value)}
           />
         </div>
 
@@ -45,7 +31,7 @@ const Create = () => {
             type="email"
             className="form-control"
             aria-describedby="emailHelp"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => console.log(e.target.value)}
           />
         </div>
 

@@ -1,0 +1,18 @@
+.badge{
+    background-color: #614ea6;
+}
+
+.accordion-button{
+    background-color: #F3F3F3;
+}
+
+.accordion-button:not(.collapsed){
+    background-color: #b9c7f1;
+}
+
+.userContent{
+    max-width: 1920px;
+}
+.userNotContent{
+    max-width: 1920px;
+}

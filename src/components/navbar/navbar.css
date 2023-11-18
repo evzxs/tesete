@@ -1,0 +1,24 @@
+.navbar{
+    background-color: #614ea6;
+}
+
+.nav-item a{
+    color: #fff;
+    transition: .3s ease-in;
+}
+.nav-item a:hover{
+    color: rgb(190, 190, 190);
+}
+
+.navbar-nav .logout{
+    color: #fff;
+    transition: .3s ease-in;
+}
+.navbar-nav .logout:hover{
+    color: rgb(190, 190, 190);
+    cursor: pointer;
+}
+
+.navbar-toggler:focus{
+    box-shadow: 0 0 0 1px;
+}

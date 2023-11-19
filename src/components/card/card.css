@@ -14,8 +14,7 @@
 
 .card{
     display: inline-block;
-    min-width: 258px;
-    max-width: 298px;
+    width: 258px;
     max-height: 337px;
     text-align: left!important;
 }
@@ -24,14 +23,14 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-height: 24px;
+    height: 24px;
 }
 
 .card-text{
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-height: 24px;
+    height: 24px;
 }
 
 .img-cartao{

@@ -32,7 +32,7 @@ function UsuarioRecuperarSenha(){
             <div className="msg my-4 text-center">
                 <span>{msg}</span>
             </div>
-            <button onClick={recuperarSenha} type="button" className="btn w-100 btn-lg btn-block btn-enviar">Recuperar Senha</button>
+            <input value="Recuperr Senha" onClick={recuperarSenha} type="submit" className="btn w-100 btn-lg btn-block btn-enviar"/>
         </form>
         </>
     );

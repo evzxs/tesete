@@ -40,12 +40,13 @@ function CriarCard(){
         };
         if(foto){
             const nomefoto = foto.name.split('.').pop().toLowerCase()
-            if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg'){Object.assign(body, {foto: foto.name.split('.').pop()})}else{Object.assign(body, {foto: null});}
+            if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg' || nomefoto === 'gif' || nomefoto === 'svg' || nomefoto === 'webp'){Object.assign(body, {foto: foto.name.split('.').pop()})}else{Object.assign(body, {foto: null});}
         }
+        else{Object.assign(body, {foto: null});}
         db.collection('cards').add(body).then((resultado)=>{
             if(foto){
                 const nomefoto = foto.name.split('.').pop().toLowerCase()
-                if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg'){
+                if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg' || nomefoto === 'gif' || nomefoto === 'svg' || nomefoto === 'webp'){
                     console.log(foto.name)
                     storage.ref(`imagens/${resultado.id+'.'+nomefoto}`).put(foto).then(()=>{
                         setMsgTipo('sucesso');
@@ -103,12 +104,12 @@ function CriarCard(){
                 </div>
                 <div className="form-group">
                     <label>Upload da Foto:</label>
-                    <input onChange={(e) => setFoto(e.target.files[0])} type="file" className="form-control"/>
+                    <input onChange={(e) => setFoto(e.target.files[0])} type="file" accept="image/*" className="form-control"/>
                 </div>
                 <div className="row">
                     {
                     carregando ? <div className="mx-auto spinner-border text-danger mt-3" role="status"></div>
-                    : <button onClick={cadastrar} type="button" className={"btn btn-lg btn-block mt-3 mb-5 btn-cadastro w-100 "+botao}>Criar Card</button>
+                    : <input onClick={cadastrar} type="submit" value="Criar Card" className={"btn btn-lg btn-block mt-3 mb-5 btn-cadastro w-100 "+botao}/>
                     }
                 </div>
             </form>

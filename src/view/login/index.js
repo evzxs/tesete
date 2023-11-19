@@ -54,7 +54,7 @@ function Login() {
           </div>
             {
             carregando ? <div className={'row '+spinner}><div className="mx-auto spinner-border text-danger mt-3" role="status"></div></div>
-            : <button onClick={logar} className="btn w-100 btn-login text-white" type="button">Logar</button> 
+            : <input onClick={logar} value="Logar" className="btn w-100 btn-login text-white" type="submit"/> 
             }
           <div className="msg-login text-center my-5">
             {msgTipo === 'sucesso' && <span><strong>WoW!</strong> Você está conectado! &#128526;</span>}

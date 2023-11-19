@@ -109,7 +109,7 @@ function CriarCard(){
                 <div className="row">
                     {
                     carregando ? <div className="mx-auto spinner-border text-danger mt-3" role="status"></div>
-                    : <input onClick={cadastrar} type="submit" value="Criar Card" className={"btn btn-lg btn-block mt-3 mb-5 btn-cadastro w-100 "+botao}/>
+                    : <button onClick={cadastrar} type="button" className={"btn btn-lg btn-block mt-3 mb-5 btn-cadastro w-100 "+botao}>Criar Card</button>
                     }
                 </div>
             </form>

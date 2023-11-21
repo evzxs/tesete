@@ -1,4 +1,6 @@
 {
+  "name": "Talk Cards - Comunicação",
+  "short_name": "Talk Cards",
   "theme_color": "#8936FF",
   "background_color": "#2EC6FE",
   "icons": [
@@ -19,8 +21,6 @@
   "display": "standalone",
   "dir": "auto",
   "lang": "pt-BR",
-  "name": "Talk Cards - Comunicação",
-  "short_name": "Talk Cards",
   "start_url": "https://evzxs.github.io/tesete/",
   "scope": "https://evzxs.github.io/tesete/",
   "description": "Comunicação é a chave para a felicidade",

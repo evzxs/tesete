@@ -59,7 +59,7 @@ function NovoUsuario(){
         <><Navbar/>
             {useSelector(state => state.usuarioLogado) > 0 ? <Navigate to="/"/> : null }
             <div className="form-cadastro">
-                <form className="text-center form-login mx-auto mt-5">
+                <form onSubmit={e => e.preventDefault()} className="text-center form-login mx-auto mt-5">
                     <h1 className="h3 mb-3 text-black fw-bold">Cadastro</h1>
                     <div className="form-floating">
                         <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control my-2" id="floatingInput" placeholder="E-mail"/>

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/tesete/static/css/main.2833fc96.css",
-    "main.js": "/tesete/static/js/main.a946c115.js",
+    "main.js": "/tesete/static/js/main.05cf0dce.js",
     "static/media/LOgo.svg": "/tesete/static/media/LOgo.d03123ed3969b0889ac2c36d0b39a994.svg",
     "index.html": "/tesete/index.html",
     "main.2833fc96.css.map": "/tesete/static/css/main.2833fc96.css.map",
-    "main.a946c115.js.map": "/tesete/static/js/main.a946c115.js.map"
+    "main.05cf0dce.js.map": "/tesete/static/js/main.05cf0dce.js.map"
   },
   "entrypoints": [
     "static/css/main.2833fc96.css",
-    "static/js/main.a946c115.js"
+    "static/js/main.05cf0dce.js"
   ]
 }

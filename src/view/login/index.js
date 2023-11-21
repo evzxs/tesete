@@ -17,10 +17,20 @@ function Login() {
   const [msgTipo, setMsgTipo] = useState();
   const [carregando, setCarregando] = useState();
   const [spinner, setSpinner] = useState();
+  const [msg, setMsg] = useState();
   const dispatch = useDispatch();
 
   function logar(){
     setCarregando(1);
+    setMsgTipo(null);
+    
+    if(!email || !senha){
+      setCarregando(0);
+      setMsgTipo('erro');
+      setMsg('Você precisa informar o e-mail e senha para fazer o login!');
+      return;
+  };
+
     firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado =>{
       setSpinner('d-none');
       setMsgTipo('sucesso');
@@ -30,6 +40,7 @@ function Login() {
       }, 2000);
     }).catch(erro =>{
       setMsgTipo('erro');
+      setMsg('Verifique se o usuário ou a senha estão corretos!')
       setCarregando(0);
     });
   };
@@ -37,12 +48,12 @@ function Login() {
   return (
     <>
     <Navbar/>
-      <div className="login-content d-flex align-items-center my-5 py-lg-5">
+      <div className="login-content d-flex align-items-center my-2 py-lg-5">
         {useSelector(state => state.usuarioLogado) > 0 ? <Navigate to="/"/> : null}
-        <form className="form-signin mx-auto">
+        <form onSubmit={e => e.preventDefault()} className="form-signin mx-auto">
           <div className="text-center mb-4">
             <img className="mb-4" src={Logo} alt="" width="150" height="150"/>
-            <h1 className="h3 mb-3 fw-normal text-white fw-bold">Login</h1>
+            <h1 className="h3 mb-3 fw-normal fw-bold">Login</h1>
           </div>
           <div className="form-floating">
             <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control my-2" id="floatingInput" placeholder="E-mail"/>
@@ -54,13 +65,13 @@ function Login() {
           </div>
             {
             carregando ? <div className={'row '+spinner}><div className="mx-auto spinner-border text-danger mt-3" role="status"></div></div>
-            : <input onClick={logar} value="Logar" className="btn w-100 btn-login text-white" type="submit"/> 
+            : <input onClick={logar} value="Logar" className="btn btn-lg btn-block mt-3 btn-login w-100 text-white" type="submit"/> 
             }
-          <div className="msg-login text-center my-5">
+          <div className="msg-login text-center my-3">
             {msgTipo === 'sucesso' && <span><strong>WoW!</strong> Você está conectado! &#128526;</span>}
-            {msgTipo === 'erro' && <span><strong>Ops!</strong> Verifique se o usuário ou a senha estão corretos! &#128546;</span>}
+            {msgTipo === 'erro' && <span><strong>Ops!</strong> {msg} &#128546;</span>}
           </div>
-          <div className="opcoes-login mt-5 text-center">
+          <div className="opcoes-login mt-3 text-center">
             <Link to="/usuariorecuperarsenha" className="mx-2">Recuperar Senha</Link>
             <span>&#9733;</span>
             <Link to="/novousuario" className="mx-2">Quero Cadastrar</Link>

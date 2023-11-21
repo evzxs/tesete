@@ -2,12 +2,17 @@
     width: 100%;
 }
 
+.form-signin{
+    width: 280px;
+}
+
 .btn-login{
-    background-color: #614ea6;
+    background-color: #614EA6;
+    transition: .3s ease-in;
 }
 
 .btn-login:hover{
-    background-color: #f21657;
+    background-color: #412d8a;
 }
 
 .opcoes-login a{
@@ -17,5 +22,5 @@
 }
 
 .opcoes-login a:hover{
-    color: #f21657;
+    color: #614EA6;
 }

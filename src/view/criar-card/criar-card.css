@@ -2,6 +2,11 @@
     margin-bottom: 15px;
 }
 
-.btn-cadastro:hover{
-    background-color: #f21657;
-} 
+.btn-criarCard{
+    background-color: #614EA6;
+    transition: .3s ease-in;
+}
+
+.btn-criarCard:hover{
+    background-color: #412d8a;
+}

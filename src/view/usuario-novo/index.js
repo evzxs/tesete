@@ -4,6 +4,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import Navbar from '../../components/navbar/'
 import firebase from '../../config/firebase';
 import 'firebase/compat/auth';
+import Logo from '../LOgo.svg'
 
 import './usuario-novo.css';
 
@@ -58,9 +59,12 @@ function NovoUsuario(){
     return (
         <><Navbar/>
             {useSelector(state => state.usuarioLogado) > 0 ? <Navigate to="/"/> : null }
-            <div className="form-cadastro">
-                <form onSubmit={e => e.preventDefault()} className="text-center form-login mx-auto mt-5">
-                    <h1 className="h3 mb-3 text-black fw-bold">Cadastro</h1>
+            <div className="form-cadastro  d-flex align-items-center my-2 py-lg-5">
+                <form onSubmit={e => e.preventDefault()} className="text-center form-login mx-auto">
+                    <div className="text-center mb-4">
+                    <img className="mb-4" src={Logo} alt="" width="150" height="150"/>
+                    <h1 className="h3 mb-3 fw-normal fw-bold">Cadastro</h1>
+                    </div>
                     <div className="form-floating">
                         <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control my-2" id="floatingInput" placeholder="E-mail"/>
                         <label htmlFor="floatingInput">Email</label>
@@ -71,9 +75,9 @@ function NovoUsuario(){
                     </div>
                     {
                         carregando ? <div className="spinner-border text-danger mt-3" role="status"></div>
-                        : <input onClick={cadastrar} type="submit" value="Cadastrar" className={"btn btn-lg btn-block mt-3 mb-5 btn-cadastro w-100 "+botao}/>
+                        : <input onClick={cadastrar} type="submit" value="Cadastrar" className={"text-white btn btn-lg btn-block mt-3 btn-cadastro w-100 "+botao}/>
                     }
-                    <div className="msg-login text-black text-center ">
+                    <div className="msg-login text-black text-center mt-3">
                     {msgTipo === 'sucesso' && <span><strong>WoW!</strong> Usuário cadastrado com sucesso &#128526;</span>}
                     {msgTipo === 'erro' && <span><strong>Ops!</strong> {msg} &#128546;</span>}
                     </div>

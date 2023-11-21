@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./home.css";
-import firebase from '../../config/firebase'
+import firebase from '../../config/firebase';
 import {Link} from 'react-router-dom';
 import 'firebase/compat/firestore';
-import Navbar from '../../components/navbar/'
+import Navbar from '../../components/navbar/';
 import Card from "../../components/card";
 import { useSelector } from "react-redux";
 
@@ -14,6 +14,10 @@ function Home(){
     const [cards, setCards] = useState([]);
     const [modalBody, setModalBody] = useState([]);
     const [modalTitle, setModalTitle] = useState([]);
+    const updateModal = (a, b)=>{
+        setModalTitle(a);
+        setModalBody(b);
+    }
     let listaCards = [];
     const usuarioEmail = useSelector(state => state.usuarioEmail);
 
@@ -26,7 +30,6 @@ function Home(){
                 });
             });
             setCards(listaCards);
-            console.log(cards);
         });// eslint-disable-next-line
     }, []);
 
@@ -39,7 +42,7 @@ function Home(){
                     <div className="modal-header">
                         <h1 className="modal-title fs-5" id="cardModalLabel">
                         {
-                        modalTitle.length !== 0 ? modalBody
+                        modalTitle.length !== 0 ? modalTitle
                         : <>Carregando...</>
                         }
                         </h1>
@@ -75,7 +78,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Comida').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Comida').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes}/>)
+                                    cards.filter((a) => a.tipo === 'Comida').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} props={updateModal}/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>
@@ -95,7 +98,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Emergências').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Emergências').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes}/>)
+                                    cards.filter((a) => a.tipo === 'Emergências').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} props={updateModal}/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>
@@ -115,7 +118,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Outros').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Outros').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes}/>)
+                                    cards.filter((a) => a.tipo === 'Outros').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} props={updateModal}/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>

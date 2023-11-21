@@ -4,8 +4,8 @@ import firebase from "../../config/firebase";
 import 'firebase/compat/auth';
 import 'firebase/compat/storage';
 
+function GerarCard({id, img, titulo, detalhes, visualizacoes, props}){
 
-function GerarCard({id, img, titulo, detalhes, visualizacoes}){
 
     const storage = firebase.storage();
     const [urlImagem, setUrlImagem] = useState();
@@ -39,7 +39,7 @@ function GerarCard({id, img, titulo, detalhes, visualizacoes}){
             <div className="card-body">
                 <h5 className="card-title">{titulo}</h5>
                 <p className="card-text">{detalhes}</p>
-                <button type="button" className="btn btn-sm btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal">
+                <button type="button" className="btn btn-sm btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo,detalhes)}>
                 + Detalhes
                 </button>
             </div>

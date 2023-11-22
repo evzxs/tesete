@@ -32,10 +32,8 @@ function CriarCard(){
         const body = {
             titulo: titulo,
             tipo: tipo,
-            detalhes: detalhes,
             usuario: usuarioEmail,
-            visualizacoes: 0,
-            publico: 1,
+            itens: [],
             criacao: new Date()
         };
         if(foto){

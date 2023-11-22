@@ -5,18 +5,19 @@ import {Link} from 'react-router-dom';
 import 'firebase/compat/firestore';
 import Navbar from '../../components/navbar/';
 import Card from "../../components/card";
+import ItemCard from "../../components/itemcard";
 import { useSelector } from "react-redux";
 
 const db = firebase.firestore();
 
 function Home(){
-
+    const teste = ['bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd']
     const [cards, setCards] = useState([]);
     const [modalBody, setModalBody] = useState([]);
     const [modalTitle, setModalTitle] = useState([]);
     const updateModal = (a, b)=>{
         setModalTitle(a);
-        setModalBody(b);
+        setModalBody(teste.map(item => <ItemCard/>));
     }
     let listaCards = [];
     const usuarioEmail = useSelector(state => state.usuarioEmail);
@@ -48,7 +49,7 @@ function Home(){
                         </h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div className="modal-body">
+                    <div class="modal-body d-flex justify-content-center flex-wrap">
                         {
                         modalBody.length !== 0 ? modalBody
                         : <>...</>

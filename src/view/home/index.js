@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 const db = firebase.firestore();
 
 function Home(){
-    const teste = ['bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd']
+    const teste = ['bca', 'asd',  'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd']
     const [cards, setCards] = useState([]);
     const [modalBody, setModalBody] = useState([]);
     const [modalTitle, setModalTitle] = useState([]);
@@ -47,7 +47,7 @@ function Home(){
                         : <>Carregando...</>
                         }
                         </h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                     </div>
                     <div class="modal-body d-flex justify-content-center flex-wrap">
                         {
@@ -55,9 +55,12 @@ function Home(){
                         : <>...</>
                         }
                     </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                    <div className="modal-footer  justify-content-between">
+                    <button type="submit" class="btn btn-danger">Apagar card</button>                                    
+                        <div>
+                        <button type="button" className="btn btn-primary me-2">Editar card</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
                     </div>
                 </div>
             </div>

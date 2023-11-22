@@ -8,14 +8,25 @@
     color: #fff;
 }
 .btn-detalhes:hover{
-    background-color: #f21667;
+    background-color: rgb(130, 106, 216);
     color: #fff;
 }
+
+.btn-detalhes:active:hover{
+    background-color: #614ea6;
+    color: #fff;
+}
+.btn-detalhes:active:focus-within{
+    background-color: #614ea6;
+    color: #fff;
+}
+
+
 
 .card{
     display: inline-block;
     width: 258px;
-    max-height: 337px;
+    max-height: 304px;
     text-align: left!important;
 }
 

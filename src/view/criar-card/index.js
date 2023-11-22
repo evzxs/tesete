@@ -45,7 +45,6 @@ function CriarCard(){
             if(foto){
                 const nomefoto = foto.name.split('.').pop().toLowerCase()
                 if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg' || nomefoto === 'gif' || nomefoto === 'svg' || nomefoto === 'webp'){
-                    console.log(foto.name)
                     storage.ref(`imagens/${resultado.id+'.'+nomefoto}`).put(foto).then(()=>{
                         setMsgTipo('sucesso');
                         setCarregando(0);

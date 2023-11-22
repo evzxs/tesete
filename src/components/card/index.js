@@ -36,11 +36,10 @@ function GerarCard({id, img, titulo, detalhes, visualizacoes, props}){
             : <img src={urlImagem} className="card-img-top img-fluid img-cartao" alt="Imagem do Card" id={id}/>
             }
             
-            <div className="card-body">
+            <div className="card-body text-center">
                 <h5 className="card-title">{titulo}</h5>
-                <p className="card-text">{detalhes}</p>
-                <button type="button" className="btn btn-sm btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo,detalhes)}>
-                + Detalhes
+                <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo,detalhes)}>
+                Ver card
                 </button>
             </div>
         </div>

@@ -4,8 +4,7 @@ import firebase from "../../config/firebase";
 import 'firebase/compat/auth';
 import 'firebase/compat/storage';
 
-function GerarCard({id, img, titulo, detalhes, visualizacoes, props}){
-
+function GerarCard({id, img, titulo, descricao, props}){
 
     const storage = firebase.storage();
     const [urlImagem, setUrlImagem] = useState();
@@ -30,15 +29,15 @@ function GerarCard({id, img, titulo, detalhes, visualizacoes, props}){
     , []);
     
     return(
-        <div className="card m-2">
+        <div className="card card-home m-2">
             {
             carregando ? <div className='row spinnerCard'><div className="mx-auto spinner-border text-danger my-5" role="status"></div></div>
             : <img src={urlImagem} className="card-img-top img-fluid img-cartao" alt="Imagem do Card" id={id}/>
             }
             
             <div className="card-body text-center">
-                <h5 className="card-title">{titulo}</h5>
-                <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo,id)}>
+                <h5 className="card-title card-title-home lead">{titulo}</h5>
+                <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo, descricao, urlImagem, id)}>
                 Ver card
                 </button>
             </div>

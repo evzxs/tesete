@@ -33,7 +33,7 @@ function CriarCard(){
             titulo: titulo,
             tipo: tipo,
             usuario: usuarioEmail,
-            itens: [],
+            descricao: detalhes,
             criacao: new Date()
         };
         if(foto){
@@ -82,22 +82,25 @@ function CriarCard(){
             </div>
             <form>
                 <div className="form-group">
-                    <label>Título: </label>
-                    <input onChange={(e) => setTitulo(e.target.value)} type="text" className="form-control"/>
+                    <label htmlFor="tituloInput">Título: </label>
+                    <input id="tituloInput" onChange={(e) => setTitulo(e.target.value)} type="text" className="form-control"/>
                 </div>
                 <div className="form-group">
-                    <label>Tipo do card: </label>
-                    <select defaultValue={'-- Selecione um tipo --'} onChange={(e) => setTipo(e.target.value)} className="form-control">
+                    <label htmlFor="tipoSelect">Tipo do card: </label>
+                    <select id="tipoSelect" defaultValue={'-- Selecione um tipo --'} onChange={(e) => setTipo(e.target.value)} className="form-control">
                         <option disabled>-- Selecione um tipo --</option>
                         <option>Comida</option>
                         <option>Emergências</option>
                         <option>Outros</option>
                     </select>
-  
                 </div>
                 <div className="form-group">
-                    <label>Upload da foto:</label>
-                    <input onChange={(e) => setFoto(e.target.files[0])} type="file" accept="image/*" className="form-control"/>
+                    <label htmlFor="descricaoTextArea">Descrição do card</label>
+                    <textarea className="form-control" onChange={(e) => setDetalhes(e.target.value)} id="descricaoTextArea" rows="3"/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="fotoInput">Upload da foto:</label>
+                    <input id="fotoInput" onChange={(e) => setFoto(e.target.files[0])} type="file" accept="image/*" className="form-control"/>
                 </div>
                 <div className="row">
                     {

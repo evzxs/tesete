@@ -13,6 +13,12 @@
 .userContent{
     max-width: 1920px;
 }
+
 .userNotContent{
     max-width: 1920px;
+}
+
+.img-Modal{
+    object-fit: contain;
+    max-height: 800px;
 }

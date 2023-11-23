@@ -5,30 +5,43 @@ import {Link} from 'react-router-dom';
 import 'firebase/compat/firestore';
 import Navbar from '../../components/navbar/';
 import Card from "../../components/card";
-import ItemCard from "../../components/itemcard";
 import { useSelector } from "react-redux";
 
 const db = firebase.firestore();
 
 function Home(){
-    const teste = ['bca', 'ger',  'trt', 'dgx', 'aee', 'hnc', 'fdg', 'lkn', 'grt', 'xxzcv', 'adsfr', 'ter', 'qwert']
+    
     const [cards, setCards] = useState([]);
-    const [isModalEditable, setModalEditable] = useState(false);
     const [modalBody, setModalBody] = useState([]);
-    const [modalRenderedID, setModalRenderedID] = useState([]);
     const [modalTitle, setModalTitle] = useState([]);
-    const turnModalEditable = event => {
-        setModalEditable(current => !current);
-        setModalBody(teste.map(item => <ItemCard key={item} cardId={modalRenderedID} itemId={item} isEditable={!isModalEditable}/>));
-      };
-    const updateModal = (a, b)=>{
-        setModalTitle(a);
-        setModalRenderedID(b);
-        setModalEditable(false);
-        setModalBody(teste.map(item => <ItemCard key={item} cardId={b} itemId={item} isEditable={false}/>));
+    const [currentModalId, setCurrentModalId] = useState([]);
+    const updateModal = (title, description, imgsrc, id)=>{
+        setModalTitle(title);
+        setCurrentModalId(id);
+        setModalBody(<>
+        {description?<>
+            <div className="card-body w-100 border-bottom">
+                <p className="card-text">{description}</p>
+            </div>
+        </>
+        :null
+        }
+        <img src={imgsrc} className="img-fluid img-Modal" alt={title}/>
+        </>
+        );
     }
     let listaCards = [];
     const usuarioEmail = useSelector(state => state.usuarioEmail);
+    
+
+    const deleteCard = async(id)=>{
+        if (window.confirm("Você tem certeza que quer apagar esse card?\nEssa ação é irreversível.") === true){
+            await db.collection('cards').doc(id).delete().then(()=>{window.location.reload(false)}).catch((error) => {console.log(error)});
+        }
+        else{
+            
+        }
+    }
 
     useEffect(() => {
         db.collection('cards').where('usuario', '==', usuarioEmail).get().then(async (resultado) => {
@@ -49,7 +62,7 @@ function Home(){
             <div className="modal-dialog modal-fullscreen">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="cardModalLabel">
+                        <h1 className="modal-title lead fs-5" id="cardModalLabel">
                         {
                         modalTitle.length !== 0 ? modalTitle
                         : <>Carregando...</>
@@ -57,32 +70,16 @@ function Home(){
                         </h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                     </div>
-                    <div className="modal-body d-flex justify-content-center flex-wrap">
+                    <div className="modal-body p-0 d-flex justify-content-center flex-wrap">
                         {
-                        modalBody.length !== 0 ? modalBody
+                        modalBody.length !== 0 ? <div className="card w-100 border-white">{modalBody}</div>
                         : <>...</>
                         }
                     </div>
-
-                        {
-                            isModalEditable?
-                            <div className="modal-footer justify-content-between">
-                                <button type="submit" className="btn btn-danger">Apagar card</button>
-                                <div>
-                                    <button type="button" className="btn btn-primary me-2" onClick={turnModalEditable}>Parar de editar</button>
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                </div>
-                            </div>
-                            :
-                            <div className="modal-footer">
-                                    <button type="button" className="btn btn-primary" onClick={turnModalEditable}>Editar card</button>
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            </div>
-                        }
-
-                    
-
-
+                    <div className="modal-footer justify-content-between">
+                        <button type="submit" className="btn btn-danger" onClick={()=>{deleteCard(currentModalId)}}>Apagar card</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -103,7 +100,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Comida').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Comida').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} props={updateModal}/>)
+                                    cards.filter((a) => a.tipo === 'Comida').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} descricao={item.descricao} visualizacoes={item.visualizacoes} props={updateModal}/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>
@@ -123,7 +120,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Emergências').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Emergências').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} props={updateModal}/>)
+                                    cards.filter((a) => a.tipo === 'Emergências').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} descricao={item.descricao} visualizacoes={item.visualizacoes} props={updateModal}/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>
@@ -143,7 +140,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Outros').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Outros').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} detalhes={item.detalhes} visualizacoes={item.visualizacoes} props={updateModal}/>)
+                                    cards.filter((a) => a.tipo === 'Outros').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} descricao={item.descricao} visualizacoes={item.visualizacoes} props={updateModal}/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>

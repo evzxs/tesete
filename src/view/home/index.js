@@ -11,13 +11,21 @@ import { useSelector } from "react-redux";
 const db = firebase.firestore();
 
 function Home(){
-    const teste = ['bca', 'asd',  'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd', 'bca', 'asd']
+    const teste = ['bca', 'ger',  'trt', 'dgx', 'aee', 'hnc', 'fdg', 'lkn', 'grt', 'xxzcv', 'adsfr', 'ter', 'qwert']
     const [cards, setCards] = useState([]);
+    const [isModalEditable, setModalEditable] = useState(false);
     const [modalBody, setModalBody] = useState([]);
+    const [modalRenderedID, setModalRenderedID] = useState([]);
     const [modalTitle, setModalTitle] = useState([]);
+    const turnModalEditable = event => {
+        setModalEditable(current => !current);
+        setModalBody(teste.map(item => <ItemCard key={item} cardId={modalRenderedID} itemId={item} isEditable={!isModalEditable}/>));
+      };
     const updateModal = (a, b)=>{
         setModalTitle(a);
-        setModalBody(teste.map(item => <ItemCard/>));
+        setModalRenderedID(b);
+        setModalEditable(false);
+        setModalBody(teste.map(item => <ItemCard key={item} cardId={b} itemId={item} isEditable={false}/>));
     }
     let listaCards = [];
     const usuarioEmail = useSelector(state => state.usuarioEmail);
@@ -49,19 +57,32 @@ function Home(){
                         </h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                     </div>
-                    <div class="modal-body d-flex justify-content-center flex-wrap">
+                    <div className="modal-body d-flex justify-content-center flex-wrap">
                         {
                         modalBody.length !== 0 ? modalBody
                         : <>...</>
                         }
                     </div>
-                    <div className="modal-footer  justify-content-between">
-                    <button type="submit" class="btn btn-danger">Apagar card</button>                                    
-                        <div>
-                        <button type="button" className="btn btn-primary me-2">Editar card</button>
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        </div>
-                    </div>
+
+                        {
+                            isModalEditable?
+                            <div className="modal-footer justify-content-between">
+                                <button type="submit" className="btn btn-danger">Apagar card</button>
+                                <div>
+                                    <button type="button" className="btn btn-primary me-2" onClick={turnModalEditable}>Parar de editar</button>
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                </div>
+                            </div>
+                            :
+                            <div className="modal-footer">
+                                    <button type="button" className="btn btn-primary" onClick={turnModalEditable}>Editar card</button>
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        }
+
+                    
+
+
                 </div>
             </div>
         </div>

@@ -38,7 +38,7 @@ function GerarCard({id, img, titulo, detalhes, visualizacoes, props}){
             
             <div className="card-body text-center">
                 <h5 className="card-title">{titulo}</h5>
-                <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo,detalhes)}>
+                <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo,id)}>
                 Ver card
                 </button>
             </div>

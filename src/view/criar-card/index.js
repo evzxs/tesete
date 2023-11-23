@@ -78,7 +78,7 @@ function CriarCard(){
         {useSelector(state => state.usuarioLogado) > 0 ? null : <Navigate to="/"/> }
         <div className="col-12 p-3">
             <div className="row text-center">
-                <h3 className="mx-auto fw-bold">Novo Card</h3>
+                <h3 className="mx-auto fw-bold">Novo card</h3>
             </div>
             <form>
                 <div className="form-group">
@@ -86,7 +86,7 @@ function CriarCard(){
                     <input onChange={(e) => setTitulo(e.target.value)} type="text" className="form-control"/>
                 </div>
                 <div className="form-group">
-                    <label>Tipo do Card: </label>
+                    <label>Tipo do card: </label>
                     <select defaultValue={'-- Selecione um tipo --'} onChange={(e) => setTipo(e.target.value)} className="form-control">
                         <option disabled>-- Selecione um tipo --</option>
                         <option>Comida</option>
@@ -96,17 +96,13 @@ function CriarCard(){
   
                 </div>
                 <div className="form-group">
-                    <label>Descrição do Card</label>
-                    <textarea onChange={(e) => setDetalhes(e.target.value)} className="form-control" rows={3}/>
-                </div>
-                <div className="form-group">
-                    <label>Upload da Foto:</label>
+                    <label>Upload da foto:</label>
                     <input onChange={(e) => setFoto(e.target.files[0])} type="file" accept="image/*" className="form-control"/>
                 </div>
                 <div className="row">
                     {
                     carregando ? <div className="mx-auto spinner-border text-danger mt-3" role="status"></div>
-                    : <button onClick={cadastrar} type="button" className={"btn btn-lg btn-block my-3 btn-criarCard text-white w-100 "+botao}>Criar Card</button>
+                    : <button onClick={cadastrar} type="button" className={"btn btn-lg btn-block my-3 btn-criarCard text-white w-100 "+botao}>Criar card</button>
                     }
                 </div>
             </form>

@@ -10,6 +10,7 @@ import NovoUsuario from './view/usuario-novo';
 import Home from './view/home';
 import UsuarioRecuperarSenha from './view/usuario-recuperar-senha';
 import CriarCard from './view/criar-card';
+import CardsRef from "./view/cardsref";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/usuariorecuperarsenha' element={<UsuarioRecuperarSenha/>}/>
             <Route path='/criarcard' element={<CriarCard/>}/>
+            <Route path='/cardsref' element={<CardsRef/>}/>
           </Routes>
         </BrowserRouter>
       </PersistGate>

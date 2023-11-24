@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import "./criar-card.css";
 import Navbar from '../../components/navbar'
 import firebase from '../../config/firebase';
@@ -110,9 +110,13 @@ function CriarCard(){
                 </div>
             </form>
             <div className="msg-login text-center">
-            {msgTipo === 'sucesso' && <span><strong>WoW!</strong> Card criado! &#128526;</span>}
-            {msgTipo === 'erro' && <span><strong>Ops!</strong> Não foi possível criar o card! &#128546;</span>}
-          </div>
+                {msgTipo === 'sucesso' && <span><strong>WoW!</strong> Card criado! &#128526;</span>}
+                {msgTipo === 'erro' && <span><strong>Ops!</strong> Não foi possível criar o card! &#128546;</span>}
+            </div>
+            <div className="text-center pt-5">
+                <h3>Está sem ideias?</h3>
+                <h4><Link to='/cardsref'>Veja alguns cards pré-prontos!</Link></h4>
+            </div>
         </div>
         </>
     )

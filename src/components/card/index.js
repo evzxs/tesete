@@ -4,7 +4,7 @@ import firebase from "../../config/firebase";
 import 'firebase/compat/auth';
 import 'firebase/compat/storage';
 
-function GerarCard({id, img, titulo, descricao, props}){
+function GerarCard({id, img, titulo, descricao, props, typeButton}){
 
     const storage = firebase.storage();
     const [urlImagem, setUrlImagem] = useState();
@@ -22,6 +22,7 @@ function GerarCard({id, img, titulo, descricao, props}){
                     setCarregando(0);
                     },2000)
                 }).catch(error =>{
+                    setUrlImagem(img)
                     setTimeout(()=>{setCarregando(0)},2000)
                 });
             }
@@ -37,8 +38,9 @@ function GerarCard({id, img, titulo, descricao, props}){
             
             <div className="card-body text-center">
                 <h5 className="card-title card-title-home lead">{titulo}</h5>
-                <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo, descricao, urlImagem, id)}>
-                Ver card
+                <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo, descricao, urlImagem, id, typeButton)}>
+                {typeButton === "vercard"? "Ver card"
+                : "Adicionar card"}
                 </button>
             </div>
         </div>

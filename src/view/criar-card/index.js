@@ -38,7 +38,16 @@ function CriarCard(){
         };
         if(foto){
             const nomefoto = foto.name.split('.').pop().toLowerCase()
-            if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg' || nomefoto === 'gif' || nomefoto === 'svg' || nomefoto === 'webp'){Object.assign(body, {foto: foto.name.split('.').pop()})}else{Object.assign(body, {foto: null});}
+            if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg' || nomefoto === 'gif' || nomefoto === 'svg' || nomefoto === 'webp'){
+                Object.assign(body, {
+                    foto: foto.name.split('.').pop()
+                })
+            }
+            else{
+                Object.assign(body, {
+                    foto: null
+                });
+            }
         }
         else{Object.assign(body, {foto: null});}
         db.collection('cards').add(body).then((resultado)=>{

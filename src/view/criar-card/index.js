@@ -21,6 +21,13 @@ function CriarCard(){
     const usuarioEmail = useSelector(state => state.usuarioEmail);
     const navigate = useNavigate();
 
+    function success(){
+        setMsgTipo('sucesso');
+        setCarregando(0);
+        setBotao('disabled');
+        setTimeout(()=>{navigate('/')}, 2000);
+    }
+
     function cadastrar(){
         if(!titulo || !tipo || !detalhes){
             setMsgTipo('erro');
@@ -54,26 +61,11 @@ function CriarCard(){
             if(foto){
                 const nomefoto = foto.name.split('.').pop().toLowerCase()
                 if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg' || nomefoto === 'gif' || nomefoto === 'svg' || nomefoto === 'webp'){
-                    storage.ref(`imagens/${resultado.id+'.'+nomefoto}`).put(foto).then(()=>{
-                        setMsgTipo('sucesso');
-                        setCarregando(0);
-                        setBotao('disabled');
-                        setTimeout(()=>{navigate('/')}, 2000);
-                    });
+                    storage.ref(`imagens/${resultado.id+'.'+nomefoto}`).put(foto).then(()=>(success()));
                 }
-                else{
-                    setMsgTipo('sucesso');
-                    setCarregando(0);
-                    setBotao('disabled');
-                    setTimeout(()=>{navigate('/')}, 2000);
-                }
+                else(success());
             }
-            else{
-                setMsgTipo('sucesso');
-                setCarregando(0);
-                setBotao('disabled');
-                setTimeout(()=>{navigate('/')}, 2000);
-            };
+            else(success());
         }).catch(erro => {
             console.log(erro)
             setMsgTipo('erro');

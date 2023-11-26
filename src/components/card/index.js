@@ -4,7 +4,7 @@ import firebase from "../../config/firebase";
 import 'firebase/compat/auth';
 import 'firebase/compat/storage';
 
-function GerarCard({id, img, titulo, descricao, props, typeButton}){
+function GerarCard({id, img, titulo, descricao, props, typeButton, tipo}){
 
     const storage = firebase.storage();
     const [urlImagem, setUrlImagem] = useState();
@@ -12,7 +12,7 @@ function GerarCard({id, img, titulo, descricao, props, typeButton}){
 
     useEffect(()=>{
             if(img.split('.').pop() === 'null'){
-                setUrlImagem("https://firebasestorage.googleapis.com/v0/b/testers-fc6a9.appspot.com/o/imagens%2F1697669890197.png?alt=media&token=4090be02-f553-4328-8c1c-1fac936b52c3")
+                setUrlImagem("https://firebasestorage.googleapis.com/v0/b/testers-fc6a9.appspot.com/o/src%2F1697669890197.png?alt=media")
                 setTimeout(()=>{setCarregando(0)},2000)
             }
             else{
@@ -38,10 +38,15 @@ function GerarCard({id, img, titulo, descricao, props, typeButton}){
             
             <div className="card-body text-center">
                 <h5 className="card-title card-title-home lead">{titulo}</h5>
+
+                {typeButton === "vercard"? 
                 <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(titulo, descricao, urlImagem, id, typeButton)}>
-                {typeButton === "vercard"? "Ver card"
-                : "Adicionar card"}
+                    Ver card
                 </button>
+                :
+                <button type="button" className="btn btn-detalhes" data-bs-toggle="modal" data-bs-target="#cardModal" onClick={()=>props(tipo, img)}>
+                    Adicionar card
+                </button>}
             </div>
         </div>
     )

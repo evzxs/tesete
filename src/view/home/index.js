@@ -35,11 +35,8 @@ function Home(){
     
 
     const deleteCard = async(id)=>{
-        if (window.confirm("Você tem certeza que quer apagar esse card?\nEssa ação é irreversível.") === true){
+        if (window.confirm("Você tem certeza que quer apagar esse card?\nEssa ação é irreversível.")){
             await db.collection('cards').doc(id).delete().then(()=>{window.location.reload(false)}).catch((error) => {console.log(error)});
-        }
-        else{
-            
         }
     }
 

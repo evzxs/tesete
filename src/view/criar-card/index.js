@@ -28,6 +28,15 @@ function CriarCard(){
         setTimeout(()=>{navigate('/')}, 2000);
     }
 
+    function isImage(extension){
+        if(extension === 'jpg' || extension === 'png' || extension === 'jpeg' || extension === 'gif' || extension === 'svg' || extension === 'webp'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     function cadastrar(){
         if(!titulo || !tipo || !detalhes){
             setMsgTipo('erro');
@@ -45,7 +54,7 @@ function CriarCard(){
         };
         if(foto){
             const nomefoto = foto.name.split('.').pop().toLowerCase()
-            if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg' || nomefoto === 'gif' || nomefoto === 'svg' || nomefoto === 'webp'){
+            if(isImage(nomefoto) === true){
                 Object.assign(body, {
                     foto: foto.name.split('.').pop()
                 })
@@ -60,7 +69,7 @@ function CriarCard(){
         db.collection('cards').add(body).then((resultado)=>{
             if(foto){
                 const nomefoto = foto.name.split('.').pop().toLowerCase()
-                if(nomefoto === 'jpg' || nomefoto === 'png' || nomefoto === 'jpeg' || nomefoto === 'gif' || nomefoto === 'svg' || nomefoto === 'webp'){
+                if(isImage(nomefoto) === true){
                     storage.ref(`imagens/${resultado.id+'.'+nomefoto}`).put(foto).then(()=>(success()));
                 }
                 else(success());

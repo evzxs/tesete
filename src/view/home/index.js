@@ -56,7 +56,7 @@ function Home(){
         <>
         <Navbar/>
         <div className="modal fade" id="cardModal" tabIndex="-1" aria-labelledby="cardModalLabel">
-            <div className="modal-dialog modal-fullscreen">
+            <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h1 className="modal-title lead fs-5" id="cardModalLabel">

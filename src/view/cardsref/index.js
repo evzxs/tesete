@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, Navigate} from "react-router-dom";
+import { Navigate} from "react-router-dom";
 import Navbar from "../../components/navbar";
 import Card from "../../components/card";
 import firebase from '../../config/firebase';
@@ -8,23 +8,55 @@ import "./cardsref.css";
 import 'firebase/compat/storage';
 import 'firebase/compat/firestore';
 
+
 function CardsRef(){
 
-
-
-    const storage = firebase.storage();
     const db = firebase.firestore();
     const usuarioEmail = useSelector(state => state.usuarioEmail);
-    const navigate = useNavigate();
-    const [modalBody, setModalBody] = useState([]);
-    const [modalTipo, setModalTipo] = useState([]);
-    const [currentModalId, setCurrentModalId] = useState([]);
-    
-    
-    const updateModal = (tipo, id)=>{
-        setModalTipo(tipo);
-        setCurrentModalId(id);
+    const [titulo, setTitulo] = useState();
+    const [detalhes, setDetalhes] = useState();
+    const [carregando, setCarregando] = useState();
+    const [msgTipo, setMsgTipo] = useState();
+    const [botao, setBotao] = useState();
+    const [tipo, setTipo] = useState([]);
+    const [foto, setFoto] = useState([]);
+
+    function success(){
+        setMsgTipo('sucesso');
+        setCarregando(0);
+        setBotao('disabled');
+        setTimeout(()=>{window.location.href='/tesete/'}, 2000);
     }
+
+    const updateModal = (tipo, id)=>{
+        setTipo(tipo);
+        setFoto(id);
+    }
+
+    function cadastrar(){
+        if(!titulo || !tipo || !detalhes){
+            setMsgTipo('erro');
+            setCarregando(0);
+            return;
+        }
+        setMsgTipo(null);
+        setCarregando(1);
+        const body = {
+            titulo: titulo,
+            tipo: tipo,
+            usuario: usuarioEmail,
+            descricao: detalhes,
+            criacao: new Date()
+        };
+        Object.assign(body, {foto: foto})
+            db.collection('cards').add(body).then((resultado)=>{success()}).catch(erro => {
+                console.log(erro)
+                setMsgTipo('erro');
+                setCarregando(0);
+            });
+
+    };
+    
 
     return(
         <>
@@ -39,28 +71,35 @@ function CardsRef(){
                     </div>
                     <div className="modal-body">
                         <form>
-
                             <div className="mb-3">
                                 <label htmlFor="título" className="col-form-label">Título:</label>
-                                <input type="text" className="form-control" id="título"/>
+                                <input type="text" className="form-control" id="título" onChange={(e) => setTitulo(e.target.value)}/>
                             </div>
 
                             <div className="mb-3">
                                 <label htmlFor="tipoSelect" className="col-form-label">Tipo do card: </label>
-                                <select id="tipoSelect" defaultValue={'-- Selecione um tipo --'} className="form-control" disabled>
-                                    <option selected>{modalTipo}</option>
+                                <select id="tipoSelect" defaultValue={'-- Selecione um tipo --'} className="form-control" onChange={(e) => setTipo(e.target.value)} disabled>
+                                    <option defaultValue>{tipo}</option>
                                 </select>
-
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="descrição" className="col-form-label">Descrição:</label>
-                                <textarea className="form-control" id="descrição"></textarea>
+                                <textarea className="form-control" id="descrição" onChange={(e) => setDetalhes(e.target.value)}></textarea>
                             </div>
                         </form>
+                    <div className="msg-login text-center mb-2 mt-4">
+                        {
+                        carregando ? <div className="mx-auto spinner-border text-danger" role="status"></div>
+                        :<>
+                        {msgTipo === 'sucesso' && <span><strong>WoW!</strong> Card criado! &#128526;</span>}
+                        {msgTipo === 'erro' && <span><strong>Ops!</strong> Não foi possível criar o card! &#128546;</span>}
+                        </>
+                        }
+                    </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Send message</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button onClick={cadastrar} type="button" className={"btn btn-primary "+botao} >Criar card</button>
                     </div>
                 </div>
             </div>

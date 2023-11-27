@@ -97,7 +97,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Comida').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Comida').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} descricao={item.descricao} props={updateModal} typeButton="vercard"/>)
+                                    cards.filter((a) => a.tipo === 'Comida').map(item => <Card key={item.id} id={item.id} img={item.foto} titulo={item.titulo} descricao={item.descricao} props={updateModal} typeButton="vercard"/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>
@@ -117,7 +117,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Emergências').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Emergências').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} descricao={item.descricao} props={updateModal} typeButton="vercard"/>)
+                                    cards.filter((a) => a.tipo === 'Emergências').map(item => <Card key={item.id} id={item.id} img={item.foto} titulo={item.titulo} descricao={item.descricao} props={updateModal} typeButton="vercard"/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>
@@ -137,7 +137,7 @@ function Home(){
                             <div className="accordion-body text-center">
                                     {
                                     cards.filter((a) => a.tipo === 'Outros').length >= 1 ?
-                                    cards.filter((a) => a.tipo === 'Outros').map(item => <Card key={item.id} id={item.id} img={item.id+`.${item.foto}`} titulo={item.titulo} descricao={item.descricao} props={updateModal} typeButton="vercard"/>)
+                                    cards.filter((a) => a.tipo === 'Outros').map(item => <Card key={item.id} id={item.id} img={item.foto} titulo={item.titulo} descricao={item.descricao} props={updateModal} typeButton="vercard"/>)
                                     :
                                     <>
                                         <h3>Você não possui ainda nenhum card nessa categoria! &#128546;</h3>

@@ -61,15 +61,16 @@ function CriarCard(){
             }
             else{
                 Object.assign(body, {
-                    foto: null
+                    foto: "https://firebasestorage.googleapis.com/v0/b/testers-fc6a9.appspot.com/o/src%2F1697669890197.png?alt=media"
                 });
             }
         }
-        else{Object.assign(body, {foto: null});}
+        else{Object.assign(body, {foto: "https://firebasestorage.googleapis.com/v0/b/testers-fc6a9.appspot.com/o/src%2F1697669890197.png?alt=media"});}
         db.collection('cards').add(body).then((resultado)=>{
             if(foto){
                 const nomefoto = foto.name.split('.').pop().toLowerCase()
                 if(isImage(nomefoto) === true){
+                    db.collection("cards").doc(resultado.id).update({foto: `https://firebasestorage.googleapis.com/v0/b/testers-fc6a9.appspot.com/o/imagens%2F${resultado.id+'.'+nomefoto}?alt=media`});
                     storage.ref(`imagens/${resultado.id+'.'+nomefoto}`).put(foto).then(()=>(success()));
                 }
                 else(success());
